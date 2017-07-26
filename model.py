@@ -41,7 +41,7 @@ for line in lines:
 print('Total images: ', len(image_paths))
     
 from keras.models import Sequential
-from keras.layers import Flatten, Dense
+from keras.layers import Flatten, Dense, Dropout
 from keras.layers import Lambda
 #from keras.layers.pooling import MaxPooling2D
 from keras.layers import Convolution2D
@@ -86,6 +86,7 @@ image_size = (160, 320, 3)
 crop_top_bottom = (50, 20)
 crop_left_right = (0,0)
 subsample_size = (2,2)
+dropout_prob = 0.2
 
 print('Input shape: ', image_size)
 
@@ -99,18 +100,37 @@ model.add(Convolution2D(48,5,5,subsample=subsample_size,activation="relu"))
 model.add(Convolution2D(64,3,3,activation="relu"))
 model.add(Convolution2D(64,3,3,activation="relu"))
 model.add(Flatten())
+model.add(Dropout(dropout_prob))
+model.add(Dense(1164))
+model.add(Dropout(dropout_prob))
 model.add(Dense(100))
 model.add(Dense(50))
 model.add(Dense(10))
 model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
+
+# model filename
+model_filename = 'model_with_gen.h5'
+
+from keras.callbacks import ModelCheckpoint, EarlyStopping
+
+# checkpoint
+callbacks = []
+checkpoint = ModelCheckpoint(model_filename, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+callbacks.append(checkpoint)
+
+# early stopping
+earlystop = EarlyStopping(monitor='val_loss', min_delta=0, patience=0, verbose=1, mode='min')
+callbacks.append(earlystop)
+        
 history_object = model.fit_generator(train_generator, 
                                      samples_per_epoch=len(train),
                                      validation_data = valid_generator, 
                                      nb_val_samples=len(valid), 
-                                     nb_epoch=5, verbose=1)
-model.save('model_with_gen.h5')
+                                     nb_epoch=5, verbose=1,
+                                     callbacks=callbacks)
+model.save(model_filename)
 
 ### print the keys contained in the history object
 print(history_object.history.keys())
