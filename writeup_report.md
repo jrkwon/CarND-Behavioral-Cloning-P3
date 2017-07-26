@@ -1,4 +1,4 @@
-# **Behavioral Cloning** 
+#**Behavioral Cloning** 
 
 ---
 
@@ -82,13 +82,11 @@ For details about how I created the training data, see the next section.
 
 The overall strategy for deriving a model architecture was to use a well known network that showed its successful performance in the autonomous vehicle control. 
 
-My first step was to use a convolution neural network model similar to the LeNet. I thought this model might be appropriate because that worked with my traffic sign classifier project. 
+My first step was to use a convolution neural network model similar to the LeNet. I thought this model might be appropriate because that worked with my traffic sign classifier project. But the mean square error loss of the validation set did not decrease. So, I changed the network architecture to the one that NVIDIA used in [this](https://arxiv.org/pdf/1604.07316) paper. 
 
 In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
 
-To combat the overfitting, I added more training data by driving the track many more laps.
-
-But the mean square error loss of the validation set did not decrease. So, I changed the network architecture to the one that NVIDIA used in [this](https://arxiv.org/pdf/1604.07316) paper. 
+To combat the overfitting, I added two dropout layers in the fully connected layers with 20% dropout rate to the original NVIDIA model. Also overfitting can be addressed by using more training data. Thus, I added more training data by driving the track more laps.
 
 Then I have similar loss values from my training and validation sets. 
 
@@ -121,10 +119,10 @@ To augment the data sat, I also flipped images and angles thinking that this wou
 ![alt text][image6]
 ![alt text][image7]
 
-After the collection process, I had 6,555 number of data points. I then preprocessed this data by adding the left and right camera input with  calculated steering angles from the angle value based on the center image. The calculation can be done by adding 0.2 to the angle for the left and by subtracting 0.2 from the anle for the right. This will help to maintain the center of the road.
+After the collection process, I had 8,951 number of data points. I then preprocessed this data by adding the left and right camera input with  calculated steering angles from the angle value based on the center image. The calculation can be done by adding 0.2 to the angle for the left and by subtracting 0.2 from the anle for the right. This will help to maintain the center of the road.
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 4 as evidenced by the validation error loss becomes bigger than the training error loss. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. I used the ModelCheckpoint function to choose the correct number of epochs, and the EarlyStopping function was used to stop the training after the model stops improving. Finally, I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
 ![alt text][image8]
