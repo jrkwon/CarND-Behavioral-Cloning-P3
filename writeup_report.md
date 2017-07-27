@@ -87,7 +87,7 @@ My first step was to use a convolution neural network model similar to the LeNet
 
 In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
 
-To combat the overfitting, I added two dropout layers in the fully connected layers with 20% dropout rate to the original NVIDIA model. Also overfitting can be addressed by using more training data. Thus, I added more training data by driving the track more laps.
+To combat the overfitting, I added a dropout layer in the fully connected layers with 20% dropout rate to the original NVIDIA model. Also overfitting can be addressed by using more training data. Thus, I added more training data by driving the track more laps.
 
 Then I have similar loss values from my training and validation sets. 
 
