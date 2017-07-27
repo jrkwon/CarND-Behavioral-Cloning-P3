@@ -111,7 +111,7 @@ model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam')
 
 # model filename
-model_filename = 'model_with_gen.h5'
+model_filename = 'model.h5'
 
 from keras.callbacks import ModelCheckpoint, EarlyStopping
 
