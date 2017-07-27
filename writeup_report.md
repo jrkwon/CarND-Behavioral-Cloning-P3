@@ -99,7 +99,7 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
 
-Here is a visualization of the architecture. This is identical to the NVIDIA's network except the input image size. They used 200x66x3, but I used 90x320x3. Note that the input image size is 160x320x3, but the input image is cropped to remove some sections that are not part of the road. I took this image from [the NVIDIA's paper](https://arxiv.org/pdf/1604.07316).
+Here is a visualization of the architecture. This is identical to the NVIDIA's network except the input image size and the number of node in the first fully connected layer. They used 200x66x3, but I used 90x320x3. The first fully connected layer containing the 1,164 neurons in the original NVIDIA's network was removed because the layer made the model too big for this project submission. I was able to make a successful model without the layer by adding a dropout and adding more training data. Note that the input image size is 160x320x3, but the input image is cropped to remove some sections that are not part of the road. I took this image from [the NVIDIA's paper](https://arxiv.org/pdf/1604.07316).
 
 ![alt text][image1]
 
@@ -120,7 +120,7 @@ To augment the data sat, I also flipped images and angles thinking that this wou
 ![alt text][image6]
 ![alt text][image7]
 
-After the collection process, I had 8,951 number of data points. I then preprocessed this data by adding the left and right camera input with  calculated steering angles from the angle value based on the center image. The calculation can be done by adding 0.2 to the angle for the left and by subtracting 0.2 from the anle for the right. This will help to maintain the center of the road.
+After the collection process, I had 12,000 number of data points. I then preprocessed this data by adding the left and right camera input with  calculated steering angles from the angle value based on the center image. The calculation can be done by adding 0.2 to the angle for the left and by subtracting 0.2 from the anle for the right. This will help to maintain the center of the road.
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
