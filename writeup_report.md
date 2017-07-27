@@ -23,6 +23,7 @@ The goals / steps of this project are the following:
 [image6]: ./writeup_images/left_2017_07_21_09_45_41_362.jpg "Normal Image"
 [image7]: ./writeup_images/left_2017_07_21_09_45_41_362_flip.jpg "Flipped Image"
 [image8]: ./writeup_images/mean_square_error_loss.png "Model Error Loss"
+[image9]: ./writeup_images/mean_square_error_loss_with_earlystopping.png "Model Error Loss with Early Stopping"
 
 ## Rubric Points
 Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -123,6 +124,14 @@ After the collection process, I had 8,951 number of data points. I then preproce
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. I used the ModelCheckpoint function to choose the correct number of epochs, and the EarlyStopping function was used to stop the training after the model stops improving. Finally, I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The plot below shows the changes of mean square error loss values of the training and validation set when I didn't use the generator. ModelCheckPoint and EarlyStopping were not used as well. As the plot indicates, in the fifth epoch the mean square error loss of the training set is lower than the loss of the validation set. This indicates overfitting is happening. 
 
 ![alt text][image8]
+
+After introducting the generator and dropout, the data set that I used to train the convolutional neural network withouth them was not able to train the network. So I had to collect more training data in the positions where the vehicle fell over. 
+ 
+Finally, I used the ModelCheckpoint function to choose the correct number of epochs, and the EarlyStopping function was used to stop the training after the model stops improving. When it comes to the learning rate, I used an adam optimizer so that manually training the learning rate was not necessary.
+
+![alt text][image9]
+
+The training was stopped early in the case where I used ModelCheckpoint and EarlyStopping since the validation loss was not improved in the later epoch. 
