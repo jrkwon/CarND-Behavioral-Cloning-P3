@@ -128,7 +128,7 @@ I used this training data for training the model. The validation set helped dete
 
 ![alt text][image8]
 
-After introducting the generator and dropout, the data set that I used to train the convolutional neural network withouth them was not able to train the network. So I had to collect more training data in the positions where the vehicle fell over. 
+After introducting the generator and dropout, the data set that I used to train the convolutional neural network without them was not able to train the network. So I had to collect more training data in the positions where the vehicle fell over. 
  
 Finally, I used the ModelCheckpoint function to choose the correct number of epochs, and the EarlyStopping function was used to stop the training after the model stops improving. When it comes to the learning rate, I used an adam optimizer so that manually training the learning rate was not necessary.
 
