@@ -57,19 +57,19 @@ The model.py file contains the code for training and saving the convolution neur
 
 My model consists of three convolutional neural networks with 5x5 filter size and depths between 24, 36, and 48, and two more convolutional neural networks with 3x3 filter size and depths 64 are followed (model.py lines 96-100).
 
-The model includes RELU layers to introduce nonlinearity (code line 96-100), and the data is normalized in the model using a Keras lambda layer (code line 93). 
+The model includes RELU layers to introduce nonlinearity (code line 96-100), and the data is normalized in the model using a Keras lambda layer (code line 94). 
 
 The model also includes four fully connected layers after the convolutional networks. The numbers of the nodes in the layers are 100, 50, 10, and 1.
 
 #### 2. Attempts to reduce overfitting in the model
 
-The model does not contains dropout layers. 
+I added a dropout layer with 20% rate.
 
 The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 54-55). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
 #### 3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 107).
+The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 110).
 
 #### 4. Appropriate training data
 
