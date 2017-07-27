@@ -63,7 +63,7 @@ The model also includes four fully connected layers after the convolutional netw
 
 #### 2. Attempts to reduce overfitting in the model
 
-I added a dropout layer with 20% rate.
+I added a dropout layer with the 20% rate in the starting fully connected layer.
 
 The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 54-55). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
