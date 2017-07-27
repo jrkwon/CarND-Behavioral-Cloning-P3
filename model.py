@@ -93,7 +93,6 @@ print('Input shape: ', image_size)
 model = Sequential()
 model.add(Lambda(lambda x: (x/ 255.0) - 0.5, input_shape=image_size))
 model.add(Cropping2D(cropping=(crop_top_bottom, crop_left_right)))
-
 model.add(Convolution2D(24,5,5,subsample=subsample_size,activation="relu"))
 model.add(Convolution2D(36,5,5,subsample=subsample_size,activation="relu"))
 model.add(Convolution2D(48,5,5,subsample=subsample_size,activation="relu"))
